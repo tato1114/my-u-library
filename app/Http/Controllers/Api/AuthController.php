@@ -14,9 +14,10 @@ class AuthController extends Controller
 {
     public function register(RegisterRequest $request)
     {
-        $input = $request->only('name', 'email', 'password');
+        $input = $request->only('role', 'first_name', 'last_name', 'email', 'password');
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
+        $user->assignRole($input['role']);
         $response['token'] = $user->createToken('MyApp')->plainTextToken;
         $response['message'] = 'User register successfully.';
 

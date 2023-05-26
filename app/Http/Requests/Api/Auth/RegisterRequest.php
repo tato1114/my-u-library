@@ -4,6 +4,7 @@ namespace App\Http\Requests\Api\Auth;
 
 use App\Traits\RequestValidationErrorTrait;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 class RegisterRequest extends FormRequest
@@ -25,7 +26,12 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
+            'role' => [
+                'required',
+                Rule::in(['librarian', 'user'])
+            ],
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'email' => 'required|email',
             'password' => [
                 'required',
