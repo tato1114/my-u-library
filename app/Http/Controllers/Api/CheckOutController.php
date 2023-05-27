@@ -18,7 +18,11 @@ class CheckOutController extends Controller
     public function index(IndexCheckOutRequest $request)
     {
         $page_size = $request->query('page_size', 10);
-        $check_outs = CheckOut::with('book')->paginate($page_size);
+        $filter = $request->query('filter', '');
+        $check_outs = CheckOut::filter($filter)
+            ->with(['book', 'user'])
+            ->orderBy('check_out_date', 'desc')
+            ->paginate($page_size);
 
         return response()->json($check_outs, Response::HTTP_OK);
     }
@@ -38,7 +42,7 @@ class CheckOutController extends Controller
         $check_out = CheckOut::create($data);
         $book->decrement('stock');
 
-        return response()->json($check_out->load('book'), Response::HTTP_CREATED);
+        return response()->json($check_out->load(['book', 'user']), Response::HTTP_CREATED);
     }
 
     /**

@@ -22,6 +22,7 @@ class IndexCheckOutRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'filter' => 'string',
             'page_size' => 'numeric|min:1|max:100'
         ];
     }
