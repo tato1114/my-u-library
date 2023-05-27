@@ -18,15 +18,26 @@ class PermissionSeeder extends Seeder
         // php artisan db:seed --class=PermissionSeeder
 
         $librarian_role = Role::firstOrCreate(['name' => 'librarian']);
+        // User
         $librarian_role->givePermissionTo(Permission::firstOrCreate(['name' => 'user.register']));
+        // Book
         $librarian_role->givePermissionTo(Permission::firstOrCreate(['name' => 'books.index']));
         $librarian_role->givePermissionTo(Permission::firstOrCreate(['name' => 'books.show']));
         $librarian_role->givePermissionTo(Permission::firstOrCreate(['name' => 'books.store']));
         $librarian_role->givePermissionTo(Permission::firstOrCreate(['name' => 'books.update']));
         $librarian_role->givePermissionTo(Permission::firstOrCreate(['name' => 'books.destroy']));
+        // Check out
+        $librarian_role->givePermissionTo(Permission::firstOrCreate(['name' => 'check_outs.index']));
+        $librarian_role->givePermissionTo(Permission::firstOrCreate(['name' => 'check_outs.show']));
+        $librarian_role->givePermissionTo(Permission::firstOrCreate(['name' => 'check_outs.update']));
 
         $user_role = Role::firstOrCreate(['name' => 'user']);
+        // Book
         $user_role->givePermissionTo(Permission::firstOrCreate(['name' => 'books.index']));
         $user_role->givePermissionTo(Permission::firstOrCreate(['name' => 'books.show']));
+        // Check out
+        $user_role->givePermissionTo(Permission::firstOrCreate(['name' => 'check_outs.index']));
+        $user_role->givePermissionTo(Permission::firstOrCreate(['name' => 'check_outs.show']));
+        $user_role->givePermissionTo(Permission::firstOrCreate(['name' => 'check_outs.store']));
     }
 }

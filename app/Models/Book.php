@@ -11,8 +11,6 @@ class Book extends Model
 {
     use HasFactory, SoftDeletes;
 
-
-
     protected $fillable = [
         'title',
         'slug',
@@ -26,5 +24,10 @@ class Book extends Model
     {
         $this->attributes['title'] = $value;
         $this->attributes['slug'] = Str::slug($value);
+    }
+
+    public function checkOuts()
+    {
+        return $this->hasMany(CheckOut::class);
     }
 }

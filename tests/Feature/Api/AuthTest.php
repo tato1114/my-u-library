@@ -3,7 +3,6 @@
 namespace Tests\Feature\Api;
 
 use App\Models\User;
-use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Sanctum\Sanctum;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,7 +26,7 @@ class AuthTest extends TestCase
             User::factory()->create()->assignRole('librarian')
         );
 
-        $password = fake()->password(10);
+        $password = fake()->password(8) . '1$';
         $user_mock = User::factory()->make()->toArray();
         $user_mock["role"] = "user";
         $user_mock["password"] = $password;
