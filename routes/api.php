@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BookController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/auth/login', [AuthController::class, 'login'])->name('user.login');
 Route::post('/auth/register', [AuthController::class, 'register'])->name('user.register')->middleware(['auth:sanctum', 'hasPermission']);
+
+Route::apiResource('/books', BookController::class)->middleware(['auth:sanctum', 'hasPermission']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

@@ -14,8 +14,19 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        $user_role = Role::create(['name' => 'user']);
-        $librarian_role = Role::create(['name' => 'librarian']);
-        $librarian_role->givePermissionTo(Permission::create(['name' => 'user.register']));
+        // To clean insert all permissions run this command
+        // php artisan db:seed --class=PermissionSeeder
+
+        $librarian_role = Role::firstOrCreate(['name' => 'librarian']);
+        $librarian_role->givePermissionTo(Permission::firstOrCreate(['name' => 'user.register']));
+        $librarian_role->givePermissionTo(Permission::firstOrCreate(['name' => 'books.index']));
+        $librarian_role->givePermissionTo(Permission::firstOrCreate(['name' => 'books.show']));
+        $librarian_role->givePermissionTo(Permission::firstOrCreate(['name' => 'books.store']));
+        $librarian_role->givePermissionTo(Permission::firstOrCreate(['name' => 'books.update']));
+        $librarian_role->givePermissionTo(Permission::firstOrCreate(['name' => 'books.destroy']));
+
+        $user_role = Role::firstOrCreate(['name' => 'user']);
+        $user_role->givePermissionTo(Permission::firstOrCreate(['name' => 'books.index']));
+        $user_role->givePermissionTo(Permission::firstOrCreate(['name' => 'books.show']));
     }
 }
