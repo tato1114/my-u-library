@@ -19,7 +19,7 @@ class BookController extends Controller
     {
         $page_size = $request->query('page_size', 10);
         $filter = $request->query('filter', '');
-        $books = Book::filter($filter)->paginate($page_size);
+        $books = Book::filter($filter)->orderBy('title')->paginate($page_size);
 
         return response()->json($books, Response::HTTP_OK);
     }
@@ -49,7 +49,7 @@ class BookController extends Controller
     public function update(UpdateBookRequest $request, Book $book)
     {
         $data = $request->only(['title', 'author', 'published_year', 'genre', 'stock']);
-        $book->updated($data);
+        $book->update($data);
 
         return response()->json($book, Response::HTTP_OK);
     }
