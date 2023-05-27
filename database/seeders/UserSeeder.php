@@ -14,13 +14,19 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $default_user = User::factory()->create([
-            'first_name' => 'Test',
-            'last_name' => 'User',
-            'email' => 'test@email.com',
+        $default_librarian_user = User::factory()->create([
+            'first_name' => 'librarian',
+            'last_name' => 'test',
+            'email' => 'librarian@email.com',
         ]);
 
-        $default_user->assignRole(Role::firstOrCreate(['name' => 'librarian']));
+        $default_librarian_user->assignRole(Role::firstOrCreate(['name' => 'librarian']));
+        $default_user = User::factory()->create([
+            'first_name' => 'user',
+            'last_name' => 'test',
+            'email' => 'user@email.com',
+        ]);
+        $default_user->assignRole(Role::firstOrCreate(['name' => 'user']));
 
         User::factory(10)->create();
     }
