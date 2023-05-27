@@ -18,7 +18,8 @@ class BookController extends Controller
     public function index(IndexBookRequest $request)
     {
         $page_size = $request->query('page_size', 10);
-        $books = Book::paginate($page_size);
+        $filter = $request->query('filter', '');
+        $books = Book::filter($filter)->paginate($page_size);
 
         return response()->json($books, Response::HTTP_OK);
     }
