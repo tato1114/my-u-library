@@ -17,7 +17,7 @@ class AuthController extends Controller
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $user->assignRole($input['role']);
-        $response['token'] = $user->createToken('MyApp')->plainTextToken;
+        $response['token'] = $user->createToken($user->id)->plainTextToken;
         $response['message'] = 'User register successfully.';
 
         return response()->json($response, Response::HTTP_OK);
@@ -29,6 +29,8 @@ class AuthController extends Controller
         if (Auth::attempt(['email' => $input['email'], 'password' => $input['password']])) {
             $user = Auth::user();
             $response['token'] = $user->createToken('MyULibrary')->plainTextToken;
+            $response['name'] = $user->first_name . ' ' . $user->last_name;
+            $response['role'] = $user->getRoleNames()->first();
             $response['message'] = 'User login successfully.';
 
             return response()->json($response, Response::HTTP_OK);
