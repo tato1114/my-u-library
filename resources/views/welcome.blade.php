@@ -11,7 +11,9 @@
 <body class="antialiased">
     <div
         class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-        <p>Welcome to My U library, this is only the backend server, please go to <a></a> to interact with the frontend
+        <p>Welcome to My U library, this is only the backend server, please go to <a
+                href="https://my-u-library-nextjs.vercel.app/">https://my-u-library-nextjs.vercel.app/</a> to interact
+            with the frontend
             app</p>
     </div>
 </body>
